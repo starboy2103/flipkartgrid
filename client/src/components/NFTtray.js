@@ -1,9 +1,10 @@
 import React from 'react'
 import {useState,useEffect} from 'react'
-import { useMoralis } from 'react-moralis';
+import {Link} from 'react-router-dom'
 
 
 export default function NFTtray() {
+  
   var [Nft,setNft]=useState([]);
   useEffect(()=>{
   const fetchVal=async()=>{
@@ -14,6 +15,7 @@ export default function NFTtray() {
   })}
   fetchVal()
   },[])
+
   return (
       <div className="container col col-md-4" style={{"width": "auto"}}>
         {Nft.result!==undefined && Nft.result.map((e)=>(
@@ -22,7 +24,8 @@ export default function NFTtray() {
             <div className="card-body">
                 <h5 className="card-title">{JSON.parse(e.metadata).name}</h5>
                 <p className="card-text">{JSON.parse(e.metadata).description}</p>
-                <a href="/" className="btn btn-primary">Go somewhere</a>
+                <Link className="btn btn-primary" to={{pathname:"/mint"}} state={{id:e.token_id}}>Mint</Link>
+                <Link className="btn btn-primary" to={{pathname:"/transfer"}} state={{id:e.token_id}}>Transfer</Link>
             </div>
           </div>
         ))}

@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <MoralisProvider serverUrl="https://tyju19glnirm.usemoralis.com:2053/server" appId="938DT4YogQx0odWlISqYb7LMu40FJXx4Acas5SGE">
-      <App />
+        <App />
     </MoralisProvider>
   </React.StrictMode>
 );
