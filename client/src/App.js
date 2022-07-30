@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Nfttray from "./components/NFTtray"
 import MintForm from "./components/MintForm"
 import TransferForm from "./components/TransferForm"
+import Decay from "./components/Decay";
 import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<><Navbar/> <Nfttray/></>}></Route>
           <Route exact path="/mint" element={<MintForm/>}></Route>
           <Route exact path="/transfer" element={<TransferForm/>}></Route>
+          <Route exact path="/decay" element={<Decay/>}></Route>
         </Routes>
       </Router>
     </div>

@@ -23,6 +23,7 @@ export default function NFTtray() {
             <img className="card-img-top" src={JSON.parse(e.metadata).image} alt="NFT"/>
             <div className="card-body">
                 <h5 className="card-title">{JSON.parse(e.metadata).name}</h5>
+                <p className="card-text">Number of NFTs: {e.amount}</p>
                 <p className="card-text">{JSON.parse(e.metadata).description}</p>
                 <Link className="btn btn-primary" to={{pathname:"/mint"}} state={{id:e.token_id}}>Mint</Link>
                 <Link className="btn btn-primary" to={{pathname:"/transfer"}} state={{id:e.token_id}}>Transfer</Link>

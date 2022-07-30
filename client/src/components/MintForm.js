@@ -26,7 +26,7 @@ function MintForm() {
       const provider=new ethers.providers.Web3Provider(window.ethereum)
       await provider.send('eth_requestAccounts',[])
       const signer=provider.getSigner()
-      const contract=new ethers.Contract("0x08283e0ea6bd697e66ec043e91ea1217f165e86a",contractAbi,signer)
+      const contract=new ethers.Contract("0xc642b1f83471690abfc6b12844cdd815e9b739eb",contractAbi,signer)
       await contract.mint(Account,Id,Amount)
       setAmount(0)
       alert('Minting Done!')

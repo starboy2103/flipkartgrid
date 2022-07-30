@@ -1,19 +1,16 @@
 const app=require('express')
-const NFTs=require('../controllers/Metadata')
-var jwt = require('jsonwebtoken');
 const decayModel=require('../models/decayDb')
+const dbSend=require('../controllers/dbSend')
+var jwt = require('jsonwebtoken');
 
 const router=app.Router();
 
-router.get('/',(req,res)=>{
-    res.json({"result": NFTs.NFTs.result})
-})
-
-// router.post('/transfer',(req,res)=>{
-//     Transferer.Transferer(req.body.account,req.body.amount,req.body.Id)
-//     res.json(Transferer.reciept)
+// router.get('/transfer',(req,res)=>{
+//     res.json({"Hello":dbSend.dbSend})
 // })
+
 router.post('/transfer',async (req,res)=>{
+    console.log("reached")
     decayModel.find({"serial": req.body.serial},async (err,result)=>{
         if(err)
         {
@@ -21,19 +18,20 @@ router.post('/transfer',async (req,res)=>{
         }
         else if(!result.length)
         {
-            console.log(result)
+            console.log("First transfer")
             const token=jwt.sign({
                 serial: req.body.serial
               }, 'secret', { expiresIn: req.body.time });
+            console.log(token,req.body.account,req.body.serial,req.body.id,req.body.id)
             const decay = new decayModel({
                 userId: req.body.account,
                 serial: req.body.serial,
                 NftId: req.body.id,
                 token: token
             });
-            decay.save((err,resu)=>{
+            decay.save((err,result)=>{
                 if(err){
-                    console.log(err)
+                    console.log('error in addition')
                     res.json({isExpired:false,cancelTrans:true})
                 }
                 else{
@@ -43,8 +41,8 @@ router.post('/transfer',async (req,res)=>{
         }
         else
         {
-            const checkToken=result[0].token
-            jwt.verify(checkToken, 'secret',(err,decoded)=>{
+            console.log('Not First transfer.. Check JWT')
+            jwt.verify(result.token, 'secret',(err,decoded)=>{
                 if(err && err.name!=="TokenExpiredError")
                 {
                   console.log(err)
