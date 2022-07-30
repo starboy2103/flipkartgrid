@@ -1,15 +1,9 @@
 import { useMoralis } from "react-moralis";
-import {Link} from 'react-router-dom'
-import Nav from 'react-bootstrap/Nav'
-import Container from "react-bootstrap/Container";
 
 export default function Navbar() {
   const {
     authenticate,
     isAuthenticated,
-    isAuthenticating,
-    user,
-    account,
     logout
   } = useMoralis();
 

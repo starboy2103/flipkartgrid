@@ -5,28 +5,23 @@ import { useMoralis } from 'react-moralis';
 import {useLocation,Link} from 'react-router-dom';
 import {ethers} from 'ethers'
 import contractAbi from '../contractAbi.json';
-const axios = require('axios').default;
 
 function MintForm() {
     const {
-      authenticate,
-      isAuthenticated,
-      isAuthenticating,
-      user,
-      account,
-      logout
+      account
     } = useMoralis();
     const location = useLocation()
     const from = location.state
     const [Amount,setAmount]=useState(0)
     const [Account,setAccount]=useState(account)
+    const [Contract,setContract]=useState(from.contract)
     const [Id,setId]=useState(from.id)
     const handleSubmit = async (e) => {
       e.preventDefault();
       const provider=new ethers.providers.Web3Provider(window.ethereum)
       await provider.send('eth_requestAccounts',[])
       const signer=provider.getSigner()
-      const contract=new ethers.Contract("0xc642b1f83471690abfc6b12844cdd815e9b739eb",contractAbi,signer)
+      const contract=new ethers.Contract(Contract,contractAbi,signer)
       await contract.mint(Account,Id,Amount)
       setAmount(0)
       alert('Minting Done!')
@@ -54,7 +49,7 @@ function MintForm() {
       <Button variant="primary" type="submit">
         Mint!
       </Button>
-      <Link className="btn btn-primary" style={{"margin":"1vw"}} to={{pathname:"/"}}>Back</Link>
+      <Link className="btn btn-primary" style={{"margin":"1vw"}} to={{pathname:"/"}} state={{contract:Contract}}>Back</Link>
     </Form>
   );
 }

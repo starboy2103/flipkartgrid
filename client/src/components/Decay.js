@@ -3,25 +3,24 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/esm/Button'
 import { Link } from 'react-router-dom'
 import { useMoralis,useWeb3Transfer } from 'react-moralis';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import { ethers } from 'ethers';
-const contractAddress="0xc642b1f83471690abfc6b12844cdd815e9b739eb"
+import { useState } from 'react';
 
 export default function Decay() {
+    const navigate=useNavigate()
     const location = useLocation()
     const from = location.state
+    const [Contract,setContract]=useState(from.contract)
+    const [Expiry,setExpiry]=useState(from.warranty)
     const {
         authenticate,
         isAuthenticated,
-        isAuthenticating,
-        user,
-        account,
-        logout
       } = useMoralis();
       const { fetch, error, isFetching } = useWeb3Transfer({
         type: "erc1155",
         receiver: "0x0000000000000000000000000000000000000000",
-        contractAddress: contractAddress,
+        contractAddress: Contract,
         tokenId: from.id,
         amount: 1,
     })
@@ -33,7 +32,7 @@ export default function Decay() {
                 console.log(user.get("ethAddress"));
                 const provider=new ethers.providers.Web3Provider(window.ethereum)
                 fetch()
-                !error && alert("Done Transfer")
+                !error && alert("Done Transfer");navigate('/transfer',{replace: true,state:{id:from.id,ontract:Contract,warranty:Expiry}});
                 })
                 .catch(function (error) {
                 console.log(error);

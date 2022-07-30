@@ -4,30 +4,26 @@ import Form from 'react-bootstrap/Form';
 import { useMoralis,useWeb3Transfer } from 'react-moralis';
 import { ethers } from 'ethers';
 import {useLocation,Link,useNavigate} from 'react-router-dom';
-import {Navigate} from 'react-router'
 import axios from 'axios';
-const contractAddress="0xc642b1f83471690abfc6b12844cdd815e9b739eb"
 
 function MintForm() {
     const {
       authenticate,
       isAuthenticated,
-      isAuthenticating,
-      user,
-      account,
-      logout
+      account
     } = useMoralis();
     const navigate=useNavigate()
     const location = useLocation()
     const from = location.state
     const [Account,setAccount]=useState(account)
     const [Serial,setSerial]=useState("")
-    const [Expiry,setExpiry]=useState("")
+    const [Expiry,setExpiry]=useState(from.warranty)
+    const [Contract,setContract]=useState(from.contract)
     const [Id,setId]=useState(from.id)
     const { fetch, error, isFetching } = useWeb3Transfer({
         type: "erc1155",
         receiver: Account,
-        contractAddress: contractAddress,
+        contractAddress: Contract,
         tokenId: Id,
         amount: 1,
     })
@@ -62,12 +58,12 @@ function MintForm() {
           else if(res.data.isExpired===true && res.data.cancelTrans===true)
           {
             alert("The NFT is Decayed...")
-            navigate('/decay',{replace: true,state:{id:Id}})
+            navigate('/decay',{replace: true,state:{id:Id,contract:Contract,warranty:Expiry}})
           }
           else if(res.data.isExpired===false && res.data.cancelTrans===true)
           {
             alert("There was an error during the transaction")
-            navigate('/transfer',{replace: true})
+            navigate('/transfer',{replace: true,state:{id:Id,contract:Contract,warranty:Expiry}})
           }
         })
         .catch(function (err) {
@@ -81,12 +77,6 @@ function MintForm() {
         <Form.Control type="text" placeholder="Serial Number" value={Serial} onChange={(e)=>setSerial(e.target.value)} required/>
         <Form.Text className="text-muted">
           The Serial Number of the product
-        </Form.Text>
-      </Form.Group><Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Expiry Time in minutes</Form.Label>
-        <Form.Control type="text" placeholder="Expiry Time" value={Expiry} onChange={(e)=>setExpiry(e.target.value)} required/>
-        <Form.Text className="text-muted">
-          The Expiry date of the product
         </Form.Text>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -106,7 +96,7 @@ function MintForm() {
       <Button variant="primary" type="submit">
         Transfer!
       </Button>
-      <Link className="btn btn-primary" style={{"margin":"1vw"}} to={{pathname:"/"}}>Back</Link>
+      <Link className="btn btn-primary" style={{"margin":"1vw"}} to={{pathname:"/"}} state={{contract:Contract}}>Back</Link>
     </Form>
   );
 }

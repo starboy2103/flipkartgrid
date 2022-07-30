@@ -5,8 +5,9 @@ const decayModel=require('../models/decayDb')
 
 const router=app.Router();
 
-router.get('/',(req,res)=>{
-    res.json({"result": NFTs.NFTs.result})
+router.post('/',async (req,res)=>{
+    const val=await NFTs.disp(req.body.contract)
+    res.json({"result": val.result})
 })
 
 // router.post('/transfer',(req,res)=>{
