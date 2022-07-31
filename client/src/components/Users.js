@@ -29,7 +29,8 @@ export default function Users() {
         setUsers(res.data.result)
     }
     return (
-        <div>
+        <div style={{"width":"50%","margin-left":"25%","margin-top":"5%"}}>
+            <h2>View NFT Owners</h2>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Serial Number</Form.Label>
@@ -37,21 +38,21 @@ export default function Users() {
                     <Form.Text className="text-muted">
                     The Serial Number of the product
                     </Form.Text>
-                    <Button variant="primary" type="submit">
-                        Transfer!
+                    <Button variant="primary" type="submit" style={{"margin-top":"2%"}}>
+                        View!
                     </Button>
                 </Form.Group>
             </Form>
             {users!==undefined && users.map((e)=>(
                 <Card style={{ width: '18rem' }} key={e._id}>
                     <ListGroup variant="flush">
-                        <ListGroup.Item>{e.sender}</ListGroup.Item>
-                        <ListGroup.Item>{e.reciever}</ListGroup.Item>
-                        <ListGroup.Item>{e.createdAt}</ListGroup.Item>
+                        <ListGroup.Item><b>Sender: </b>{e.sender}</ListGroup.Item>
+                        <ListGroup.Item><b>Reciever: </b>{e.reciever}</ListGroup.Item>
+                        <ListGroup.Item><b>Transaction Time: </b>{e.createdAt}</ListGroup.Item>
                     </ListGroup>
                 </Card>
             ))}
-            <Link className="btn btn-primary" style={{"margin":"1vw"}} to={{pathname:"/"}} state={{contract:Contract}}>Back</Link>
+            <Link className="btn btn-primary" style={{"margin-top":"5%"}} to={{pathname:"/"}} state={{contract:Contract}}>Back</Link>
         </div>
     )
 }

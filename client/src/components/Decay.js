@@ -40,7 +40,7 @@ export default function Decay() {
             }
     }
   return (
-    <div>
+    <div style={{"width": "50%","margin-left":"25%"}}>
         <Link className="btn btn-primary" style={{"margin":"1vw"}} to={{pathname:"/"}}>Back</Link>
         <Form onSubmit={handleSubmit}>
             <Button variant="primary" type="submit">
