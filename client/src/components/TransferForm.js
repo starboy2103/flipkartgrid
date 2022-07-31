@@ -45,7 +45,7 @@ function MintForm() {
                   console.log("logged in user:", user);
                   console.log(user.get("ethAddress"));
                   const provider=new ethers.providers.Web3Provider(window.ethereum)
-                  fetch()
+                  await fetch()
                   !error && alert("Done Transfer")
                   })
                   .catch(function (error) {

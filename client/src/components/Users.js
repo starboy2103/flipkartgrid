@@ -47,7 +47,7 @@ export default function Users() {
                     <ListGroup variant="flush">
                         <ListGroup.Item>{e.sender}</ListGroup.Item>
                         <ListGroup.Item>{e.reciever}</ListGroup.Item>
-                        <ListGroup.Item>{e.timestapm}</ListGroup.Item>
+                        <ListGroup.Item>{e.createdAt}</ListGroup.Item>
                     </ListGroup>
                 </Card>
             ))}
