@@ -17,7 +17,7 @@ function MintForm() {
     const from = location.state
     const [Account,setAccount]=useState(account)
     const [Serial,setSerial]=useState("")
-    const [Expiry,setExpiry]=useState(from.warranty)
+    const [Expiry,setExpiry]=useState("")
     const [Contract,setContract]=useState(from.contract)
     const [Id,setId]=useState(from.id)
     const { fetch, error, isFetching } = useWeb3Transfer({
@@ -91,6 +91,12 @@ function MintForm() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>NFT Id</Form.Label>
           <Form.Control type="text" placeholder="NFT Id" value={Id} onChange={(e)=>setId(e.target.value)} required/>
+          <Form.Text className="text-muted">
+            The Id of NFT
+          </Form.Text>
+        </Form.Group><Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Expiry (in minutes)</Form.Label>
+          <Form.Control type="text" placeholder="NFT Id" value={Expiry} onChange={(e)=>setExpiry(e.target.value)} required/>
           <Form.Text className="text-muted">
             The Id of NFT
           </Form.Text>
