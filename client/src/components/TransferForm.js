@@ -34,6 +34,7 @@ function MintForm() {
           account: Account,
           time: parseInt(Expiry)*60,
           id: Id,
+          contract: Contract
         })
         .then(async (res)=> {
           if(res.data.isExpired===false && res.data.cancelTrans===false)

@@ -2,6 +2,7 @@ const app=require('express')
 const NFTs=require('../controllers/Metadata')
 var jwt = require('jsonwebtoken');
 const decayModel=require('../models/decayDb')
+const userModel=require('../models/UsersDb')
 
 const router=app.Router();
 
@@ -14,6 +15,28 @@ router.post('/',async (req,res)=>{
 //     Transferer.Transferer(req.body.account,req.body.amount,req.body.Id)
 //     res.json(Transferer.reciept)
 // })
+
+router.post('/users', async (req,res)=>{
+    userModel.find({"serial": req.body.serial},(err,response)=>{
+        if(err){
+            console.log(err)
+        }
+        else{
+            res.json({"result":response})
+        }
+    })
+})
+
+// router.post("/users", async (req,res) => {
+//     // const user = new userModel({req});
+//     // try {
+//     //   await user.save();
+//     //   response.send(user);
+//     // } catch (error) {
+//     //   response.status(500).send(error);
+//     // }
+// });
+
 router.post('/transfer',async (req,res)=>{
     decayModel.find({"serial": req.body.serial},async (err,result)=>{
         if(err)
@@ -22,7 +45,6 @@ router.post('/transfer',async (req,res)=>{
         }
         else if(!result.length)
         {
-            console.log(result)
             const token=jwt.sign({
                 serial: req.body.serial
               }, 'secret', { expiresIn: req.body.time });
@@ -32,6 +54,19 @@ router.post('/transfer',async (req,res)=>{
                 NftId: req.body.id,
                 token: token
             });
+            const user=new userModel({
+                serial: req.body.serial,
+                sender: req.body.contract,
+                reciever: req.body.account
+            });
+            user.save((err,resu)=>{
+                if(err){
+                    console.log(err)
+                }
+                else{
+                    console.log(resu)
+                }
+            })
             decay.save((err,resu)=>{
                 if(err){
                     console.log(err)

@@ -4,6 +4,7 @@ import Nfttray from "./components/NFTtray"
 import MintForm from "./components/MintForm"
 import TransferForm from "./components/TransferForm"
 import Decay from "./components/Decay";
+import Users from "./components/Users";
 import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route exact path="/mint" element={<MintForm/>}></Route>
           <Route exact path="/transfer" element={<TransferForm/>}></Route>
           <Route exact path="/decay" element={<Decay/>}></Route>
+          <Route exact path="/users" element={<Users/>}></Route>
         </Routes>
       </Router>
     </div>

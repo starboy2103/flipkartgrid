@@ -1,6 +1,6 @@
 const app=require('express')
 const decayModel=require('../models/decayDb')
-const dbSend=require('../controllers/dbSend')
+const userModel=require('../models/UsersDb')
 var jwt = require('jsonwebtoken');
 
 const router=app.Router();
@@ -9,8 +9,9 @@ const router=app.Router();
 //     res.json({"Hello":dbSend.dbSend})
 // })
 
+
+
 router.post('/transfer',async (req,res)=>{
-    console.log("reached")
     decayModel.find({"serial": req.body.serial},async (err,result)=>{
         if(err)
         {
@@ -18,7 +19,6 @@ router.post('/transfer',async (req,res)=>{
         }
         else if(!result.length)
         {
-            console.log("First transfer")
             const token=jwt.sign({
                 serial: req.body.serial
               }, 'secret', { expiresIn: req.body.time });
@@ -41,7 +41,6 @@ router.post('/transfer',async (req,res)=>{
         }
         else
         {
-            console.log('Not First transfer.. Check JWT')
             jwt.verify(result.token, 'secret',(err,decoded)=>{
                 if(err && err.name!=="TokenExpiredError")
                 {

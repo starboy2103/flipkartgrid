@@ -1,9 +1,9 @@
 import React from 'react'
 import {useState} from 'react'
-import {Link} from 'react-router-dom'
+import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {useLocation} from 'react-router-dom'
+import {useLocation,Link} from 'react-router-dom'
 
 
 export default function NFTtray() {
@@ -27,7 +27,7 @@ export default function NFTtray() {
   }
   return (
       <div className="container col col-md-4" style={{"width": "auto"}}>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} style={{"margin-bottom":"2rem"}}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>NFT Contract Address</Form.Label>
             <Form.Control type="text" placeholder="Contract address" value={contractAdd} onChange={(e)=>{setcontractAdd(e.target.value)}} required/>
@@ -40,16 +40,21 @@ export default function NFTtray() {
           </Button>
         </Form>
         {Nft.result!==undefined && Nft.result.map((e)=>(
-          <div className="card" key={e.token_id}>
-            <img className="card-img-top" src={JSON.parse(e.metadata).image} alt="NFT"/>
-            <div className="card-body">
-                <h5 className="card-title">{JSON.parse(e.metadata).name}</h5>
-                <p className="card-text">Number of NFTs: {e.amount}</p>
-                <p className="card-text">{JSON.parse(e.metadata).description}</p>
-                <Link className="btn btn-primary" to={{pathname:"/mint"}} state={{id:e.token_id,contract:contractAdd}}>Mint</Link>
-                <Link className="btn btn-primary" to={{pathname:"/transfer"}} state={{id:e.token_id,contract:contractAdd,warranty:JSON.parse(e.metadata).attributes[0].value}}>Transfer</Link>
-            </div>
-          </div>
+          <Card style={{ width: '18rem' }} key={e.token_id}>
+            <Card.Img variant="top" src={JSON.parse(e.metadata).image} alt="NFT" />
+            <Card.Body>
+              <Card.Title>{JSON.parse(e.metadata).name}</Card.Title>
+              <Card.Text>
+              Number of NFTs: {e.amount}
+              </Card.Text>
+              <Card.Text>
+              {JSON.parse(e.metadata).description}
+              </Card.Text>
+              <Link className="btn btn-primary" style={{"margin-left": "0.1rem","margin-right":"0.5rem"}} to={{pathname:"/mint"}} state={{id:e.token_id,contract:contractAdd}}>Mint</Link>
+              <Link className="btn btn-primary"  style={{"margin-left": "0.1rem","margin-right":"0.5rem"}} to={{pathname:"/transfer"}} state={{id:e.token_id,contract:contractAdd,warranty:JSON.parse(e.metadata).attributes[0].value}}>Transfer</Link>
+              <Link className="btn btn-primary"  to={{pathname:"/users"}} state={{id:e.token_id,contract:contractAdd}}>Owners</Link>
+            </Card.Body>
+          </Card>
         ))}
       </div>
   );

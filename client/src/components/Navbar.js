@@ -36,16 +36,6 @@ export default function Navbar() {
   };
   return (
     <div>
-      {/* <Navbar bg="light" variant="light">
-        <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features" onClick={logOut}>Sign Out</Nav.Link>
-            <Nav.Link href="#pricing" onClick={login}>Sign In</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar> */}
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href="/">Navbar</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="/navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
