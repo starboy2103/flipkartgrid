@@ -24,7 +24,8 @@ export default function Decay() {
         tokenId: from.id,
         amount: 1,
     })
-    const handleSubmit= async ()=>{
+    const handleSubmit= async (e)=>{
+        e.preventDefault()
         if (isAuthenticated) {
             await authenticate({ signingMessage: "Transfered By Me" })
                 .then(function (user) {
