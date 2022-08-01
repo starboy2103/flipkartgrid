@@ -79,19 +79,19 @@ export default function NFTtray() {
           <thead>
             <tr>
               <th>#</th>
-              <th>Account Name</th>
+              <th>Account Address</th>
               <th>Private Key</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>1</td>
-              <td>Account 1</td>
+              <td>0xBa1384860A2E9DbbE0A878ee5b2dd38e4a1C14b5</td>
               <td>ff7e4d44fdb62da57856cdcd41372535c8129842c6359e2f297623ceccb217a2</td>
             </tr>
             <tr>
               <td>2</td>
-              <td>Account 2</td>
+              <td>0x172aB9fb21e46474B434F0799Ab7A406B8997b1c</td>
               <td>f0fced86c731059a6101685570ba4ec6391fc68ca7b56c447da4f2df11a05f3c</td>
             </tr>
           </tbody>
