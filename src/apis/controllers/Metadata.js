@@ -13,7 +13,7 @@ const disp=async(contract)=>{
         address: contract,
         chain: "rinkeby"
     }
-    NFTs = await Moralis.Web3API.token.getAllTokenIds(options);
+    NFTs = await Moralis.Web3API.account.getNFTs(options);
     return NFTs
 }
 module.exports.disp=disp

@@ -35,6 +35,7 @@ export default function NFTtray() {
           <p>
             This is our prototype for the topic "Blockcahin Based e-Warranty System using NFTs"
           </p>
+          <p><b><u>Bug fix</u>: You can now use your metamask account Id to fetch the NFTs</b><br/><i>Please refer to the table for metamask accounts that we have created for testing</i></p>
           <p>By:-<br/>1) Kowshal<br/>2) Utkarsh</p>
           <hr />
           <div className="d-flex justify-content-end">
@@ -46,10 +47,10 @@ export default function NFTtray() {
         {!show && <Button onClick={() => setShow(true)} style={{"right":"1rem","bottom":"1rem","position":"fixed"}}>Show Developers</Button>}
         <Form onSubmit={handleSubmit} style={{"margin-bottom":"2rem"}}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>NFT Contract Address</Form.Label>
+            <Form.Label>Account Address</Form.Label>
             <Form.Control type="text" placeholder="Contract address" value={contractAdd} onChange={(e)=>{setcontractAdd(e.target.value)}} required/>
             <Form.Text className="text-muted">
-              Refer to the contract adderss mentioned in the table
+              Refer to the metamask account adderss mentioned in the table or any account containing NFTs
             </Form.Text>
           </Form.Group>
           <Button variant="primary" type="submit">
@@ -73,24 +74,24 @@ export default function NFTtray() {
             </Card.Body>
           </Card>
         ))}
-        <h2>Contract Addresses</h2>
+        <h2>Metamask Accounts</h2>
         <Table striped bordered hover style={{"margin-bottom":"5%"}}>
           <thead>
             <tr>
               <th>#</th>
-              <th>Contract Address</th>
+              <th>Account Name</th>
               <th>Private Key</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>1</td>
-              <td>0x8b17507912be185326c411060d1df02756dadfb6</td>
+              <td>Account 1</td>
               <td>ff7e4d44fdb62da57856cdcd41372535c8129842c6359e2f297623ceccb217a2</td>
             </tr>
             <tr>
               <td>2</td>
-              <td>0x21d06f5f2d1f7fefdfadff287a7c3ee8ebc2b41a</td>
+              <td>Account 2</td>
               <td>f0fced86c731059a6101685570ba4ec6391fc68ca7b56c447da4f2df11a05f3c</td>
             </tr>
           </tbody>
