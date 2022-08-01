@@ -96,9 +96,9 @@ function MintForm() {
           </Form.Text>
         </Form.Group><Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Expiry (in minutes)</Form.Label>
-          <Form.Control type="text" placeholder="NFT Id" value={Expiry} onChange={(e)=>setExpiry(e.target.value)} required/>
+          <Form.Control type="text" placeholder="Expiry Date" value={Expiry} onChange={(e)=>setExpiry(e.target.value)} required/>
           <Form.Text className="text-muted">
-            The Id of NFT
+            Expiry date of NFT
           </Form.Text>
         </Form.Group>
         <Button variant="primary" type="submit">
