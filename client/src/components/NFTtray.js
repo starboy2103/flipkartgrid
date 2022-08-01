@@ -48,7 +48,7 @@ export default function NFTtray() {
         <Form onSubmit={handleSubmit} style={{"margin-bottom":"2rem"}}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Account Address</Form.Label>
-            <Form.Control type="text" placeholder="Contract address" value={contractAdd} onChange={(e)=>{setcontractAdd(e.target.value)}} required/>
+            <Form.Control type="text" placeholder="Metamask address" value={contractAdd} onChange={(e)=>{setcontractAdd(e.target.value)}} required/>
             <Form.Text className="text-muted">
               Refer to the metamask account adderss mentioned in the table or any account containing NFTs
             </Form.Text>
